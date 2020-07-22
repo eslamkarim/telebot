@@ -1,0 +1,19 @@
+<div class="mb-3">
+        <div class="alert alert-primary">
+        <h4 class="alert-heading">
+            Chats 
+        </h4>
+        </div>
+    </div>
+
+    <% if @chats.present? %>
+      <nav class="nav flex-column">
+        <% @chats.each do |chat| %>
+          <%= link_to "#{chat.first_name} #{chat.last_name}", chat_path(chat), class: "nav-link chat-nav-link" %>
+        <% end %>
+      </nav>
+    <% else %>
+      <div class="text-muted">
+        The are no chats
+      </div>
+    <% end %>

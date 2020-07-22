@@ -1,0 +1,15 @@
+<% if @bot %>
+<h3>You already gave us a token please go <%= link_to "home", home_path %> to start messaging </h3>
+<% else %>
+<%= form_tag(add_bot_path) do %>
+    <div class="form-group">
+        <label for="Bot_Token">Bot Token</label>
+        <%= text_field_tag :Bot_Token, "", class: 'form-control' %>
+        <small id="Bot_Token" class="form-text text-muted">We'll never share your token with anyone else.</small>
+    </div>
+
+    <div class="actions">
+        <%= submit_tag "Submit" %>
+    </div>
+<% end %>
+<% end %>

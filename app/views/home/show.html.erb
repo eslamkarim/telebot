@@ -1,0 +1,61 @@
+
+<div class="row">
+  <div class="col-12 col-md-3">
+    <%= render partial: 'chats' %>
+  </div>
+
+  <div class="col">
+    <h1>
+        <%= "#{@chat.first_name} #{@chat.last_name}" %>
+    </h1>
+
+    <div class="chat">
+      <% @chat.messages.each do |chat_message| %>
+        <div class="chat-message-container">
+          <% if chat_message.sender_id == @chat.bot_id %>
+            <div class="row no-gutters">
+                <div class="col-5 ml-auto p-2">
+                <div class="message-content" style = "background: #3d52c7">
+                    <p class="mb-1">
+                        <%= chat_message.text %>
+                    </p>
+
+                    <div class="text-right">
+                    <small>
+                        <%= Time.at(chat_message.date.to_i).to_datetime %>
+                    </small>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+          <% else %>
+            <div class="row no-gutters">
+                <div class="col-5">
+                <div class="message-content">
+                    <p class="mb-1">
+                        <%= chat_message.text %>
+                    </p>
+
+                    <div class="text-right">
+                    <small>
+                        <%= Time.at(chat_message.date.to_i).to_datetime %>
+                    </small>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+    <%= form_tag(send_message_path(@chat.id)) do %>
+      <div class="input-group">
+        <%= text_field_tag :message_text, "", class: 'chat-input' %>
+        <div class="input-group-append">
+          <%= submit_tag "Send", class: 'btn btn-primary chat-input' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
